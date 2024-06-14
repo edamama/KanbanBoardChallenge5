@@ -43,7 +43,48 @@ $(document).ready(function () {
 
 
 
+//////////////////////////////////////////////////
 
+let tasks = [];
+
+commitTaskBtnEl = document.getElementById("commitTaskBtn");
+
+taskTitleEl = document.getElementById("taskTitle");
+datepickerEl = document.getElementById("datepicker");
+taskDescriptionBoxEl = document.getElementById("taskDescriptionBox");
+
+commitTaskBtnEl.addEventListener("click",function(event){
+
+    if(taskTitleEl.value && datepickerEl.value && taskDescriptionBoxEl.value) {
+
+        const taskObj = {
+
+            TaskTitle: taskTitleEl.value,
+
+            TaskDueDate: datepickerEl.value,
+
+            TaskDescription: taskDescriptionBoxEl.value,
+
+        }
+
+
+        let stringifiedTaskObj = JSON.stringify(taskObj);
+
+        tasks.push(stringifiedTaskObj);
+        localStorage.setItem("tasks",JSON.stringify(tasks));
+
+    
+    
+    } else{
+
+        event.preventDefault();
+        alert("Please enter the required fields.");
+
+    }
+
+
+
+});
 
 
 

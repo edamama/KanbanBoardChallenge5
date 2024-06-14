@@ -85,5 +85,13 @@ input,textarea:focus{
 #datepicker{
 
   margin-top:10px;
+  width:400px;
 
 }
+
+#taskTitle{
+
+  width:400px;
+
+}
+
