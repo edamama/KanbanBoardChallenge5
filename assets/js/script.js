@@ -45,13 +45,14 @@ $(document).ready(function () {
 
 //////////////////////////////////////////////////
 
-let tasks = [];
+let taskObjArray = JSON.parse(localStorage.getItem("Task List")) || [];
 
 commitTaskBtnEl = document.getElementById("commitTaskBtn");
 
 taskTitleEl = document.getElementById("taskTitle");
 datepickerEl = document.getElementById("datepicker");
 taskDescriptionBoxEl = document.getElementById("taskDescriptionBox");
+toDoSectionEl = document.querySelector("#todo-cards");
 
 commitTaskBtnEl.addEventListener("click",function(event){
 
@@ -69,10 +70,11 @@ commitTaskBtnEl.addEventListener("click",function(event){
 
 
         let stringifiedTaskObj = JSON.stringify(taskObj);
+        taskObjArray.push(stringifiedTaskObj);
 
-        tasks.push(stringifiedTaskObj);
-        localStorage.setItem("tasks",JSON.stringify(tasks));
-
+        localStorage.setItem("Task List", JSON.stringify(taskObjArray));
+        
+        
     
     
     } else{
@@ -86,6 +88,62 @@ commitTaskBtnEl.addEventListener("click",function(event){
 
 });
 
+////////////////////////////////////////////////////////
+
+let newTasks = JSON.parse(localStorage.getItem("Task List"));
+
+
+for(let i = 0; i < newTasks.length ; i++ ){
+
+    function addElements(){
+
+       let newCardDiv = document.createElement("div");
+       newCardDiv.setAttribute("class","taskCard");
+       toDoSectionEl.appendChild(newCardDiv); // uncertain if this is where it should go
+
+       
+       let taskNameDiv = document.createElement("div");
+       taskNameDiv.setAttribute("id", "nameOfTask");
+       newCardDiv.appendChild(taskNameDiv);
+
+       let taskNameH1 = document.createElement("h1");
+       taskNameH1.textContent = JSON.parse(newTasks[i]).TaskTitle;
+       taskNameDiv.appendChild(taskNameH1);
+
+
+       let descriptionDiv = document.createElement("div");
+       descriptionDiv.setAttribute("id", "descriptionOfTask");
+       newCardDiv.appendChild(descriptionDiv);
+
+       let descriptionH2 = document.createElement("h2");
+       descriptionH2.textContent = JSON.parse(newTasks[i]).TaskDescription;
+       descriptionDiv.appendChild(descriptionH2);
+
+
+       let dateDiv = document.createElement("div");
+       dateDiv.setAttribute("id", "dateDisplay");
+       newCardDiv.appendChild(dateDiv);
+
+       let dateH2 = document.createElement("h2");
+       dateH2.textContent = JSON.parse(newTasks[i]).TaskDueDate;
+       dateDiv.appendChild(dateH2);
+
+
+       let deleteBtnDiv = document.createElement("div");
+       deleteBtnDiv.setAttribute("id","deleteBtnBox");
+       newCardDiv.appendChild(deleteBtnDiv);
+
+       let deleteBtn = document.createElement("button");
+       deleteBtn.setAttribute("id","deleteBtn");
+       deleteBtn.textContent = "DELETE";
+       deleteBtnDiv.appendChild(deleteBtn);
 
 
 
+    
+    
+    }
+    
+    addElements();
+
+}
