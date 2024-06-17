@@ -8,7 +8,7 @@ function generateTaskId() {
 }
 
 // Todo: create a function to create a task card
-function createTaskCard(task) {
+function createTaskCard(task) { // I put this function below as 'addElements'
 
 }
 
@@ -88,18 +88,19 @@ commitTaskBtnEl.addEventListener("click",function(event){
 
 });
 
-////////////////////////////////////////////////////////
+///////////element generation/////////////////////////////////////////////
 
 let newTasks = JSON.parse(localStorage.getItem("Task List"));
 
 
-for(let i = 0; i < newTasks.length ; i++ ){
+for(let i = 0; i < newTasks.length; i++ ){
 
     function addElements(){
 
        let newCardDiv = document.createElement("div");
        newCardDiv.setAttribute("class","taskCard");
-       toDoSectionEl.appendChild(newCardDiv); // uncertain if this is where it should go
+       newCardDiv.setAttribute("id", "draggable");
+       document.body.appendChild(newCardDiv); 
 
        
        let taskNameDiv = document.createElement("div");
@@ -147,3 +148,33 @@ for(let i = 0; i < newTasks.length ; i++ ){
     addElements();
 
 }
+
+//////////////////////////element styling conditions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////deleting cards
+
+let deleteBtnEl = document.getElementById("deleteBtn");
+let taskCardEl = document.querySelector(".taskCard");
+
+
+deleteBtnEl.addEventListener("click",function(event){
+   
+    taskCardEl.remove();
+
+});
