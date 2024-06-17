@@ -73,9 +73,8 @@ commitTaskBtnEl.addEventListener("click",function(event){
         taskObjArray.push(stringifiedTaskObj);
 
         localStorage.setItem("Task List", JSON.stringify(taskObjArray));
-        
-        
-    
+
+        location.reload(); //immediately updates page
     
     } else{
 
@@ -88,6 +87,10 @@ commitTaskBtnEl.addEventListener("click",function(event){
 
 });
 
+///////////////////////////////////
+
+$(".taskCard").draggable(); //makes every card on screen draggable
+
 ///////////element generation/////////////////////////////////////////////
 
 let newTasks = JSON.parse(localStorage.getItem("Task List"));
@@ -99,7 +102,6 @@ for(let i = 0; i < newTasks.length; i++ ){
 
        let newCardDiv = document.createElement("div");
        newCardDiv.setAttribute("class","taskCard");
-       newCardDiv.setAttribute("id", "draggable");
        document.body.appendChild(newCardDiv); 
 
        
@@ -138,10 +140,6 @@ for(let i = 0; i < newTasks.length; i++ ){
        deleteBtn.setAttribute("id","deleteBtn");
        deleteBtn.textContent = "DELETE";
        deleteBtnDiv.appendChild(deleteBtn);
-
-
-
-    
     
     }
     
@@ -151,12 +149,40 @@ for(let i = 0; i < newTasks.length; i++ ){
 
 //////////////////////////element styling conditions
 
+/* if(currentdate === dueDate - 1(day)){
+
+    taskCard.setAttribute("style","background-color:light-yellow");
+
+}  else if(current date > dueDate){
+  
+    taskCard.setAttribute("style","background-color:light-red");
+
+    } else{
+     
+    }
+    
+}*normal colors**/
 
 
 
+for(let i = 0; i < newTasks.length; i++ ){
+
+    let currentDate = dayjs();
+
+    let currentDateNum = currentDate.$D;
+    let targetDateNum = dayjs(JSON.parse(newTasks[i]).TaskDueDate).$D; 
 
 
+    if(targetDateNum - currentDateNum === 1 ){
 
+        taskCardEl.setAttribute("style","background-color:yellow");
+
+    };
+
+
+};
+
+//fix
 
 
 
